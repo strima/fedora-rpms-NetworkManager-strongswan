@@ -1,6 +1,6 @@
 Name:      NetworkManager-strongswan
 Version:   1.3.1
-Release:   2.20151023libnm%{?dist}
+Release:   3.20151023libnm%{?dist}
 Summary:   NetworkManager strongSwan IPSec VPN plug-in
 License:   GPLv2+
 Group:     System Environment/Base
@@ -100,6 +100,9 @@ make install DESTDIR=%{buildroot}
 
 
 %changelog
+* Wed Feb 03 2016 Fedora Release Engineering <releng@fedoraproject.org> - 1.3.1-3.20151023libnm
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_24_Mass_Rebuild
+
 * Fri Oct 23 2015 Lubomir Rintel <lkundrak@v3.sk> - 1.3.1-2.20151023libnm
 - Add the NetworkManager 1.2 support patchset
 
