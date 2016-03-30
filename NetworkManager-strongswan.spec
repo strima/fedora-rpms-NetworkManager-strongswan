@@ -31,6 +31,7 @@ BuildRequires: pkgconfig(libnm-util)
 BuildRequires: pkgconfig(libnm-glib)
 BuildRequires: pkgconfig(libnm-glib-vpn)
 BuildRequires: pkgconfig(libnm) >= 1.1.0
+BuildRequires: pkgconfig(libnm-gtk)
 BuildRequires: pkgconfig(libnma) >= 1.1.0
 BuildRequires: intltool
 BuildRequires: autoconf libtool
