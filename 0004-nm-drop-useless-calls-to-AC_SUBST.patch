@@ -1,7 +1,7 @@
-From 94410692a4ce9120cbc98600cbb8fd090aee72d9 Mon Sep 17 00:00:00 2001
+From c97a542611e7415cb275b22126acf7893b111913 Mon Sep 17 00:00:00 2001
 From: Lubomir Rintel <lkundrak@v3.sk>
 Date: Wed, 21 Oct 2015 10:54:18 +0200
-Subject: [PATCH 03/10] nm: drop useless calls to AC_SUBST
+Subject: [PATCH 04/13] nm: drop useless calls to AC_SUBST
 
 PKG_CHECK_MODULES does the substitutions.
 ---
@@ -37,5 +37,5 @@ index 370d555..71fcbf2 100644
  AC_ARG_WITH(
  	[charon],
 -- 
-2.4.3
+2.5.0
 

@@ -1,7 +1,7 @@
-From 7506fa9724613443f30ddef0c36850e7d25e63f4 Mon Sep 17 00:00:00 2001
+From 977c206ce969eebbde99aeb727ba7ef1f5a3f500 Mon Sep 17 00:00:00 2001
 From: Lubomir Rintel <lkundrak@v3.sk>
 Date: Wed, 21 Oct 2015 13:06:42 +0200
-Subject: [PATCH 10/10] nm: bump minor version to 1.4.0
+Subject: [PATCH 13/13] nm: bump minor version to 1.4.0
 
 This is probably a good idea to do to signal there's significant changes in
 dependencies to the distro package maintainers with libnm port and associated
@@ -11,7 +11,7 @@ changes.
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/configure.ac b/configure.ac
-index 19f0022..3091a81 100644
+index 4013e3a..897bce5 100644
 --- a/configure.ac
 +++ b/configure.ac
 @@ -1,6 +1,6 @@
@@ -23,5 +23,5 @@ index 19f0022..3091a81 100644
  AM_MAINTAINER_MODE
  
 -- 
-2.4.3
+2.5.0
 

@@ -1,6 +1,6 @@
 Name:      NetworkManager-strongswan
 Version:   1.3.1
-Release:   3.20151023libnm%{?dist}
+Release:   3.20160330libnm%{?dist}
 Summary:   NetworkManager strongSwan IPSec VPN plug-in
 License:   GPLv2+
 Group:     System Environment/Base
@@ -8,17 +8,19 @@ URL:       https://www.strongswan.org/
 Source0:   https://download.strongswan.org/NetworkManager/%{name}-%{version}.tar.bz2
 
 # https://github.com/strongswan/strongswan/pull/15
-Patch1:    0001-nm-set-full-path-to-the-connection-editor-plugin.patch
-Patch2:    0002-nm-drop-some-unneeded-dependencies.patch
-Patch3:    0003-nm-drop-useless-calls-to-AC_SUBST.patch
-Patch4:    0004-nm-split-the-plugin-into-two-halves.patch
-Patch5:    0005-nm-check-for-libnm.patch
-Patch6:    0006-nm-port-to-libnm.patch
-Patch7:    0007-nm-replace-libgnomeui-with-libnma-for-password-dialo.patch
-Patch8:    0008-nm-replace-libgnomekeyring-with-libsecret.patch
-Patch9:    0009-nm-bump-to-GTK-3.0.patch
-Patch10:   0010-nm-bump-minor-version-to-1.4.0.patch
-Patch11:   0011-nm-install-the-.name-file-into-usr-lib-NetworkManage.patch
+Patch1:    0001-nm-install-the-.name-file-into-usr-lib-NetworkManage.patch
+Patch2:    0002-nm-set-full-path-to-the-connection-editor-plugin.patch
+Patch3:    0003-nm-drop-some-unneeded-dependencies.patch
+Patch4:    0004-nm-drop-useless-calls-to-AC_SUBST.patch
+Patch5:    0005-nm-replace-libgnomekeyring-with-libsecret.patch
+Patch6:    0006-nm-build-two-plugin-binaries-from-the-single-source.patch
+Patch7:    0007-nm-check-for-libnm.patch
+Patch8:    0008-nm-port-to-libnm.patch
+Patch9:    0009-nm-add-a-widget-for-setting-a-password.patch
+Patch10:   0010-nm-grey-out-the-unneeded-authentication-options.patch
+Patch11:   0011-nm-replace-libgnomeui-with-libnma-for-password-dialo.patch
+Patch12:   0012-nm-bump-to-GTK-3.0.patch
+Patch13:   0013-nm-bump-minor-version-to-1.4.0.patch
 
 BuildRequires: pkgconfig(gthread-2.0)
 BuildRequires: pkgconfig(dbus-glib-1) >= 0.30
@@ -70,7 +72,8 @@ with the graphical desktop.
 %patch9 -p1
 %patch10 -p1
 %patch11 -p1
-
+%patch12 -p1
+%patch13 -p1
 
 %build
 autoreconf -f -i
@@ -100,6 +103,9 @@ make install DESTDIR=%{buildroot}
 
 
 %changelog
+* Wed Mar 30 2016 Lubomir Rintel <lkundrak@v3.sk> - 1.3.1-3.20160330libnm
+- Update the NetworkManager 1.2 support patchset
+
 * Wed Feb 03 2016 Fedora Release Engineering <releng@fedoraproject.org> - 1.3.1-3.20151023libnm
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_24_Mass_Rebuild
 

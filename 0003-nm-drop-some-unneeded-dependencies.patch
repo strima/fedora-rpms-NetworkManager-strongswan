@@ -1,7 +1,7 @@
-From 078d2fe10b6f5eb634e302b9c341106b910cdba3 Mon Sep 17 00:00:00 2001
+From 5c00a222bd42f06a155309517e39d8554693379d Mon Sep 17 00:00:00 2001
 From: Lubomir Rintel <lkundrak@v3.sk>
 Date: Wed, 21 Oct 2015 12:35:59 +0200
-Subject: [PATCH 02/10] nm: drop some unneeded dependencies
+Subject: [PATCH 03/13] nm: drop some unneeded dependencies
 
 ---
  auth-dialog/Makefile.am | 1 -
@@ -40,5 +40,5 @@ index 047772d..370d555 100644
  AC_SUBST(GTK_CFLAGS)
  AC_SUBST(GTK_LIBS)
 -- 
-2.4.3
+2.5.0
 

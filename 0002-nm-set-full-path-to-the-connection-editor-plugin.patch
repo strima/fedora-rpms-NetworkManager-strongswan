@@ -1,7 +1,7 @@
-From 27dd4b8a2ef3f1fd72f70865084bb2d18a279af3 Mon Sep 17 00:00:00 2001
+From ddd314005b3823bd9d8f18ed931166f71ee7e44e Mon Sep 17 00:00:00 2001
 From: Lubomir Rintel <lkundrak@v3.sk>
 Date: Wed, 21 Oct 2015 12:45:50 +0200
-Subject: [PATCH 01/10] nm: set full path to the connection editor plugin
+Subject: [PATCH 02/13] nm: set full path to the connection editor plugin
 
 ---
  Makefile.am                   | 1 +
@@ -9,10 +9,10 @@ Subject: [PATCH 01/10] nm: set full path to the connection editor plugin
  2 files changed, 2 insertions(+), 1 deletion(-)
 
 diff --git a/Makefile.am b/Makefile.am
-index 1184711..2864eb2 100644
+index a826938..a7a30e2 100644
 --- a/Makefile.am
 +++ b/Makefile.am
-@@ -13,6 +13,7 @@ nmvpnservice_DATA = nm-strongswan-service.name
+@@ -16,6 +16,7 @@ oldnmvpnservice_DATA = $(nmvpnservice_DATA)
  nm-strongswan-service.name: $(srcdir)/nm-strongswan-service.name.in
  	$(AM_V_GEN) \
  	sed -e 's|[@]LIBEXECDIR[@]|$(libexecdir)|' \
@@ -31,5 +31,5 @@ index 4120e55..ca45ff2 100644
 -properties=libnm-strongswan-properties
 +properties=@PLUGINDIR@/libnm-strongswan-properties
 -- 
-2.4.3
+2.5.0
 

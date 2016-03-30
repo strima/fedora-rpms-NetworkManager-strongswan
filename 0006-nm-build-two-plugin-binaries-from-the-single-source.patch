@@ -1,7 +1,7 @@
-From adfd0573a1d63272277e688dbd42f93fc56596ff Mon Sep 17 00:00:00 2001
+From 5534ebe8b2f82e722dae19ac89e7d8fc487d56ec Mon Sep 17 00:00:00 2001
 From: Lubomir Rintel <lkundrak@v3.sk>
 Date: Wed, 21 Oct 2015 10:36:54 +0200
-Subject: [PATCH 04/10] nm: split the plugin into two halves
+Subject: [PATCH 06/13] nm: build two plugin binaries from the single source
 
 They're both the same now. We'll port the new one to libnm in follow-up commits.
 
@@ -81,5 +81,5 @@ index 1b7fbb9..8233ccb 100644
 +
  EXTRA_DIST = $(ui_DATA)
 -- 
-2.4.3
+2.5.0
 

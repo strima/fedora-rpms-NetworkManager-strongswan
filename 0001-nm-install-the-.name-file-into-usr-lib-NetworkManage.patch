@@ -1,7 +1,8 @@
-From c60ced33593dcf29e19c782905587a440329b0cf Mon Sep 17 00:00:00 2001
+From d12b24c02d94af2d017d48d84b246e27e270a431 Mon Sep 17 00:00:00 2001
 From: Lubomir Rintel <lkundrak@v3.sk>
 Date: Fri, 23 Oct 2015 11:29:42 +0200
-Subject: [PATCH] nm: install the .name file into /usr/lib/NetworkManager/VPN
+Subject: [PATCH 01/13] nm: install the .name file into
+ /usr/lib/NetworkManager/VPN
 
 It's a preferred location for system-provided plugins. We keep the old location
 for compatibility.
@@ -10,7 +11,7 @@ for compatibility.
  1 file changed, 4 insertions(+), 1 deletion(-)
 
 diff --git a/Makefile.am b/Makefile.am
-index 2864eb2..a7a30e2 100644
+index 1184711..a826938 100644
 --- a/Makefile.am
 +++ b/Makefile.am
 @@ -5,9 +5,12 @@ SUBDIRS = properties auth-dialog po
@@ -28,5 +29,5 @@ index 2864eb2..a7a30e2 100644
  
  nm-strongswan-service.name: $(srcdir)/nm-strongswan-service.name.in
 -- 
-2.4.3
+2.5.0
 
