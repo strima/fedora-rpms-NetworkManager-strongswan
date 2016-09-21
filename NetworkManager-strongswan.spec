@@ -1,26 +1,11 @@
 Name:      NetworkManager-strongswan
-Version:   1.3.1
-Release:   3.20160330libnm%{?dist}
+Version:   1.4.0
+Release:   1%{?dist}
 Summary:   NetworkManager strongSwan IPSec VPN plug-in
 License:   GPLv2+
 Group:     System Environment/Base
 URL:       https://www.strongswan.org/
 Source0:   https://download.strongswan.org/NetworkManager/%{name}-%{version}.tar.bz2
-
-# https://github.com/strongswan/strongswan/pull/15
-Patch1:    0001-nm-install-the-.name-file-into-usr-lib-NetworkManage.patch
-Patch2:    0002-nm-set-full-path-to-the-connection-editor-plugin.patch
-Patch3:    0003-nm-drop-some-unneeded-dependencies.patch
-Patch4:    0004-nm-drop-useless-calls-to-AC_SUBST.patch
-Patch5:    0005-nm-replace-libgnomekeyring-with-libsecret.patch
-Patch6:    0006-nm-build-two-plugin-binaries-from-the-single-source.patch
-Patch7:    0007-nm-check-for-libnm.patch
-Patch8:    0008-nm-port-to-libnm.patch
-Patch9:    0009-nm-add-a-widget-for-setting-a-password.patch
-Patch10:   0010-nm-grey-out-the-unneeded-authentication-options.patch
-Patch11:   0011-nm-replace-libgnomeui-with-libnma-for-password-dialo.patch
-Patch12:   0012-nm-bump-to-GTK-3.0.patch
-Patch13:   0013-nm-bump-minor-version-to-1.4.0.patch
 
 BuildRequires: pkgconfig(gthread-2.0)
 BuildRequires: pkgconfig(dbus-glib-1) >= 0.30
@@ -62,19 +47,7 @@ with the graphical desktop.
 
 %prep
 %setup -q
-%patch1 -p1
-%patch2 -p1
-%patch3 -p1
-%patch4 -p1
-%patch5 -p1
-%patch6 -p1
-%patch7 -p1
-%patch8 -p1
-%patch9 -p1
-%patch10 -p1
-%patch11 -p1
-%patch12 -p1
-%patch13 -p1
+
 
 %build
 autoreconf -f -i
@@ -89,7 +62,6 @@ make install DESTDIR=%{buildroot}
 
 %files -f %{name}.lang
 %{_prefix}/lib/NetworkManager/VPN/nm-strongswan-service.name
-%{_sysconfdir}/dbus-1/system.d/nm-strongswan-service.conf
 %{_libexecdir}/nm-strongswan-auth-dialog
 %{_libdir}/NetworkManager/libnm-vpn-plugin-strongswan.so
 %exclude %{_libdir}/NetworkManager/libnm-vpn-plugin-strongswan.la
@@ -99,11 +71,15 @@ make install DESTDIR=%{buildroot}
 %files gnome
 %{_sysconfdir}/NetworkManager/VPN/nm-strongswan-service.name
 %{_datadir}/gnome-vpn-properties/strongswan
+%{_datadir}/appdata/NetworkManager-strongswan.appdata.xml
 %{_libdir}/NetworkManager/libnm-strongswan-properties.so
 %exclude %{_libdir}/NetworkManager/libnm-strongswan-properties.la
 
 
 %changelog
+* Wed Sep 21 2016 Lubomir Rintel <lkundrak@v3.sk> - 1.4.0
+- New upstream release that integrates our NetworkManager 1.2 support
+
 * Wed Mar 30 2016 Lubomir Rintel <lkundrak@v3.sk> - 1.3.1-3.20160330libnm
 - Update the NetworkManager 1.2 support patchset
 
