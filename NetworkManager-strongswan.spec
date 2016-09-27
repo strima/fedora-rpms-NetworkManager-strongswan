@@ -1,11 +1,14 @@
 Name:      NetworkManager-strongswan
 Version:   1.4.0
-Release:   1%{?dist}
+Release:   2%{?dist}
 Summary:   NetworkManager strongSwan IPSec VPN plug-in
 License:   GPLv2+
 Group:     System Environment/Base
 URL:       https://www.strongswan.org/
 Source0:   https://download.strongswan.org/NetworkManager/%{name}-%{version}.tar.bz2
+
+# Bring back the D-Bus policy until new charon-nm is released
+Patch0: 0001-Revert-nm-Move-the-D-Bus-policy-to-charon-nm.patch
 
 BuildRequires: pkgconfig(gthread-2.0)
 BuildRequires: pkgconfig(dbus-glib-1) >= 0.30
@@ -47,6 +50,7 @@ with the graphical desktop.
 
 %prep
 %setup -q
+%patch0 -p1
 
 
 %build
@@ -62,6 +66,7 @@ make install DESTDIR=%{buildroot}
 
 %files -f %{name}.lang
 %{_prefix}/lib/NetworkManager/VPN/nm-strongswan-service.name
+%{_sysconfdir}/dbus-1/system.d/nm-strongswan-service.conf
 %{_libexecdir}/nm-strongswan-auth-dialog
 %{_libdir}/NetworkManager/libnm-vpn-plugin-strongswan.so
 %exclude %{_libdir}/NetworkManager/libnm-vpn-plugin-strongswan.la
@@ -77,7 +82,10 @@ make install DESTDIR=%{buildroot}
 
 
 %changelog
-* Wed Sep 21 2016 Lubomir Rintel <lkundrak@v3.sk> - 1.4.0
+* Tue Sep 27 2016 Lubomir Rintel <lkundrak@v3.sk> - 1.4.0-2
+- Bring back the D-Bus policy until new charon-nm is released
+
+* Wed Sep 21 2016 Lubomir Rintel <lkundrak@v3.sk> - 1.4.0-1
 - New upstream release that integrates our NetworkManager 1.2 support
 
 * Wed Mar 30 2016 Lubomir Rintel <lkundrak@v3.sk> - 1.3.1-3.20160330libnm
