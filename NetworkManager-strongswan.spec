@@ -1,6 +1,6 @@
 Name:      NetworkManager-strongswan
 Version:   1.4.0
-Release:   2%{?dist}
+Release:   3%{?dist}
 Summary:   NetworkManager strongSwan IPSec VPN plug-in
 License:   GPLv2+
 Group:     System Environment/Base
@@ -82,6 +82,9 @@ make install DESTDIR=%{buildroot}
 
 
 %changelog
+* Fri Feb 10 2017 Fedora Release Engineering <releng@fedoraproject.org> - 1.4.0-3
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_26_Mass_Rebuild
+
 * Tue Sep 27 2016 Lubomir Rintel <lkundrak@v3.sk> - 1.4.0-2
 - Bring back the D-Bus policy until new charon-nm is released
 
