@@ -1,14 +1,11 @@
 Name:      NetworkManager-strongswan
-Version:   1.4.0
-Release:   5%{?dist}
+Version:   1.4.2
+Release:   1%{?dist}
 Summary:   NetworkManager strongSwan IPSec VPN plug-in
 License:   GPLv2+
 Group:     System Environment/Base
 URL:       https://www.strongswan.org/
 Source0:   https://download.strongswan.org/NetworkManager/%{name}-%{version}.tar.bz2
-
-# Bring back the D-Bus policy until new charon-nm is released
-Patch0: 0001-Revert-nm-Move-the-D-Bus-policy-to-charon-nm.patch
 
 BuildRequires: pkgconfig(gthread-2.0)
 BuildRequires: pkgconfig(dbus-glib-1) >= 0.30
@@ -22,14 +19,13 @@ BuildRequires: pkgconfig(libnm) >= 1.1.0
 BuildRequires: pkgconfig(libnm-gtk)
 BuildRequires: pkgconfig(libnma) >= 1.1.0
 BuildRequires: intltool
-BuildRequires: autoconf libtool
+BuildRequires: libtool
 
 Requires: NetworkManager
-Requires: %{_libexecdir}/strongswan/charon-nm
+# Requires a version recent enough to ship the D-Bus policy
+Requires: strongswan-charon-nm > 5.6.0-1
 
-%global _privatelibs libnm-openswan-properties[.]so.*
-%global __provides_exclude ^(%{_privatelibs})$
-%global __requires_exclude ^(%{_privatelibs})$
+%global __provides_exclude ^libnm-.*\\.so
 
 %description
 This package contains software for integrating the strongSwan IPSec VPN
@@ -50,11 +46,9 @@ with the graphical desktop.
 
 %prep
 %setup -q
-%patch0 -p1
 
 
 %build
-autoreconf -f -i
 %configure --disable-static --with-charon=%{_libexecdir}/strongswan/charon-nm
 make %{?_smp_mflags}
 
@@ -66,7 +60,6 @@ make install DESTDIR=%{buildroot}
 
 %files -f %{name}.lang
 %{_prefix}/lib/NetworkManager/VPN/nm-strongswan-service.name
-%{_sysconfdir}/dbus-1/system.d/nm-strongswan-service.conf
 %{_libexecdir}/nm-strongswan-auth-dialog
 %{_libdir}/NetworkManager/libnm-vpn-plugin-strongswan.so
 %exclude %{_libdir}/NetworkManager/libnm-vpn-plugin-strongswan.la
@@ -82,6 +75,9 @@ make install DESTDIR=%{buildroot}
 
 
 %changelog
+* Thu Nov 30 2017 Lubomir Rintel <lkundrak@v3.sk> - 1.4.2-1
+- Update to 1.4.2
+
 * Wed Aug 02 2017 Fedora Release Engineering <releng@fedoraproject.org> - 1.4.0-5
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_27_Binutils_Mass_Rebuild
 
