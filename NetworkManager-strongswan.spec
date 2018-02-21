@@ -1,3 +1,10 @@
+%if 0%{?fedora} < 28 && 0%{?rhel} < 8
+%bcond_without libnm_glib
+%else
+# Disable the legacy version by default
+%bcond_with libnm_glib
+%endif
+
 Name:      NetworkManager-strongswan
 Version:   1.4.3
 Release:   1%{?dist}
@@ -7,19 +14,21 @@ Group:     System Environment/Base
 URL:       https://www.strongswan.org/
 Source0:   https://download.strongswan.org/NetworkManager/%{name}-%{version}.tar.bz2
 
-BuildRequires: pkgconfig(gthread-2.0)
-BuildRequires: pkgconfig(dbus-glib-1) >= 0.30
-BuildRequires: pkgconfig(gtk+-2.0) >= 2.6
+BuildRequires: pkgconfig(gtk+-3.0)
 BuildRequires: pkgconfig(libsecret-1)
+BuildRequires: pkgconfig(libnm) >= 1.1.0
+BuildRequires: pkgconfig(libnma) >= 1.1.0
+BuildRequires: intltool
+BuildRequires: libtool
+
+%if %with libnm_glib
+BuildRequires: pkgconfig(dbus-glib-1) >= 0.30
 BuildRequires: pkgconfig(NetworkManager) >= 1.1.0
 BuildRequires: pkgconfig(libnm-util)
 BuildRequires: pkgconfig(libnm-glib)
 BuildRequires: pkgconfig(libnm-glib-vpn)
-BuildRequires: pkgconfig(libnm) >= 1.1.0
 BuildRequires: pkgconfig(libnm-gtk)
-BuildRequires: pkgconfig(libnma) >= 1.1.0
-BuildRequires: intltool
-BuildRequires: libtool
+%endif
 
 Requires: NetworkManager
 # Requires a version recent enough to ship the D-Bus policy
@@ -49,7 +58,13 @@ with the graphical desktop.
 
 
 %build
-%configure --disable-static --with-charon=%{_libexecdir}/strongswan/charon-nm
+%configure \
+        --disable-static \
+%if %without libnm_glib
+        --without-libnm-glib \
+%endif
+        --with-charon=%{_libexecdir}/strongswan/charon-nm \
+        --enable-more-warnings=no
 make %{?_smp_mflags}
 
 
@@ -60,18 +75,21 @@ make install DESTDIR=%{buildroot}
 
 %files -f %{name}.lang
 %{_prefix}/lib/NetworkManager/VPN/nm-strongswan-service.name
-%{_libexecdir}/nm-strongswan-auth-dialog
-%{_libdir}/NetworkManager/libnm-vpn-plugin-strongswan.so
-%exclude %{_libdir}/NetworkManager/libnm-vpn-plugin-strongswan.la
 %doc NEWS
 
 
 %files gnome
-%{_sysconfdir}/NetworkManager/VPN/nm-strongswan-service.name
 %{_datadir}/gnome-vpn-properties/strongswan
+%{_libexecdir}/nm-strongswan-auth-dialog
+%{_libdir}/NetworkManager/libnm-vpn-plugin-strongswan.so
+%exclude %{_libdir}/NetworkManager/libnm-vpn-plugin-strongswan.la
 %{_datadir}/appdata/NetworkManager-strongswan.appdata.xml
-%{_libdir}/NetworkManager/libnm-strongswan-properties.so
+
+%if %with libnm_glib
+%{_libdir}/NetworkManager/libnm-*-properties.so
+%{_sysconfdir}/NetworkManager/VPN/nm-strongswan-service.name
 %exclude %{_libdir}/NetworkManager/libnm-strongswan-properties.la
+%endif
 
 
 %changelog
