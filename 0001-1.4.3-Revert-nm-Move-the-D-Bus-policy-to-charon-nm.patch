@@ -1,22 +1,7 @@
-From 5b58d2dc04f442d4bc00e9aee544b464d043c4a2 Mon Sep 17 00:00:00 2001
-From: Lubomir Rintel <lkundrak@v3.sk>
-Date: Tue, 27 Sep 2016 15:03:13 +0200
-Subject: [PATCH] Revert "nm: Move the D-Bus policy to charon-nm"
-
-This reverts commit 916cd5d7ca35f37e2db81da7db07e12fa96ab373.
-
-We need this until charon-nm >= 5.5.1 is released.
----
- Makefile.am                |  7 +++++--
- nm-strongswan-service.conf | 15 +++++++++++++++
- 2 files changed, 20 insertions(+), 2 deletions(-)
- create mode 100644 nm-strongswan-service.conf
-
-diff --git a/Makefile.am b/Makefile.am
-index 43f31e7..749a0bd 100644
---- a/Makefile.am
-+++ b/Makefile.am
-@@ -3,6 +3,9 @@ AUTOMAKE_OPTIONS = foreign
+diff -Nurw NetworkManager-strongswan-1.4.3/Makefile.am NetworkManager-strongswan-1.4.3.patched/Makefile.am
+--- NetworkManager-strongswan-1.4.3/Makefile.am	2018-02-19 12:10:11.000000000 +0100
++++ NetworkManager-strongswan-1.4.3.patched/Makefile.am	2018-03-01 01:30:56.509987228 +0100
+@@ -3,6 +3,9 @@
  SUBDIRS = properties auth-dialog po
  
  nmvpnservicedir = $(prefix)/lib/NetworkManager/VPN
@@ -26,7 +11,7 @@ index 43f31e7..749a0bd 100644
  nmvpnservice_DATA = nm-strongswan-service.name
  
  @INTLTOOL_DESKTOP_RULE@
-@@ -34,8 +37,8 @@ nm-strongswan-service.name: $(srcdir)/nm-strongswan-service.name.in
+@@ -36,8 +39,8 @@
  	    -e 's|[@]NM_PLUGINDIR_ABS[@]/|$(nm_plugindir_abs)|g' \
  	    -e 's|[@]CHARON[@]|$(charon)|' $< >$@
  
@@ -35,13 +20,11 @@ index 43f31e7..749a0bd 100644
 +EXTRA_DIST = nm-strongswan-service.name.in \
 +    $(dbusservice_DATA)  \
      $(appdata_in_files)  \
-     $(appdata_DATA)      \
      intltool-extract.in  \
-diff --git a/nm-strongswan-service.conf b/nm-strongswan-service.conf
-new file mode 100644
-index 0000000..a630f34
---- /dev/null
-+++ b/nm-strongswan-service.conf
+     intltool-merge.in    \
+diff -Nurw NetworkManager-strongswan-1.4.3/nm-strongswan-service.conf NetworkManager-strongswan-1.4.3.patched/nm-strongswan-service.conf
+--- NetworkManager-strongswan-1.4.3/nm-strongswan-service.conf	1970-01-01 01:00:00.000000000 +0100
++++ NetworkManager-strongswan-1.4.3.patched/nm-strongswan-service.conf	2018-03-01 01:30:56.509987228 +0100
 @@ -0,0 +1,15 @@
 +<!DOCTYPE busconfig PUBLIC
 + "-//freedesktop//DTD D-BUS Bus Configuration 1.0//EN"
@@ -58,6 +41,3 @@ index 0000000..a630f34
 +	</policy>
 +</busconfig>
 +
--- 
-2.7.4
-

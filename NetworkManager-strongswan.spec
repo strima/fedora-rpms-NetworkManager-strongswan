@@ -1,6 +1,6 @@
 Name:      NetworkManager-strongswan
-Version:   1.4.0
-Release:   5%{?dist}
+Version:   1.4.3
+Release:   0%{?dist}
 Summary:   NetworkManager strongSwan IPSec VPN plug-in
 License:   GPLv2+
 Group:     System Environment/Base
@@ -8,7 +8,7 @@ URL:       https://www.strongswan.org/
 Source0:   https://download.strongswan.org/NetworkManager/%{name}-%{version}.tar.bz2
 
 # Bring back the D-Bus policy until new charon-nm is released
-Patch0: 0001-Revert-nm-Move-the-D-Bus-policy-to-charon-nm.patch
+Patch0: 0001-1.4.3-Revert-nm-Move-the-D-Bus-policy-to-charon-nm.patch
 
 BuildRequires: pkgconfig(gthread-2.0)
 BuildRequires: pkgconfig(dbus-glib-1) >= 0.30
@@ -82,6 +82,9 @@ make install DESTDIR=%{buildroot}
 
 
 %changelog
+* Thu Mar 01 2018 Martin Strigl <martin.strigl@catalysts.c> - 1.4.3-0
+- Update to 1.4.3
+
 * Wed Aug 02 2017 Fedora Release Engineering <releng@fedoraproject.org> - 1.4.0-5
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_27_Binutils_Mass_Rebuild
 
